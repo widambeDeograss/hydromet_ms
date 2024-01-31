@@ -3,6 +3,7 @@ import 'package:hydromet_ms/screens/report_screen.dart';
 
 import '../components/news.dart';
 import '../components/newsCard.dart';
+import 'education_content.dart';
 import 'news_details_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -79,7 +80,66 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 24),
-                _buildEducationalContent(),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ListTile(
+                          leading: const Image(
+                            image: AssetImage('assets/images/tips.jpg'),
+                          ),
+                          title: const Text(
+                            'Education Content',
+                            style: TextStyle(
+                                fontSize: 15.0, fontWeight: FontWeight.bold),
+                          ),
+                          subtitle: Column(
+                            children: [
+                              const Text(
+                                'Learn about the impact of water quality on the environment and health.',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 5.0,
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const EducationContent(),
+                                    ),
+                                  );
+                                },
+                                child: const Row(
+                                  children: [
+                                    Icon(
+                                      Icons.arrow_forward,
+                                    ),
+                                    SizedBox(
+                                      width: 5.0,
+                                    ),
+                                    Text(
+                                      'view more',
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 24),
                 _buildNewsFeed(),
               ],
@@ -180,60 +240,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildEducationalContent() {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              leading: const Image(
-                image: AssetImage('assets/images/tips.jpg'),
-              ),
-              title: const Text(
-                'Education Content',
-                style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
-              ),
-              subtitle: Column(
-                children: [
-                  const Text(
-                    'Learn about the impact of water quality on the environment and health.',
-                    style: TextStyle(
-                      fontSize: 15,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5.0,
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Row(
-                      children: [
-                        Icon(
-                          Icons.arrow_forward,
-                        ),
-                        SizedBox(
-                          width: 5.0,
-                        ),
-                        Text(
-                          'view more',
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 
