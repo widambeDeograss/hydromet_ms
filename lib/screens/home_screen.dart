@@ -12,71 +12,73 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildLocationInfo('Dar es Salaam'),
-            const SizedBox(height: 24),
-            _buildAlertsSection(),
-            const SizedBox(height: 24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    // Add functionality for refreshing data
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildLocationInfo('Dar es Salaam'),
+              const SizedBox(height: 24),
+              _buildAlertsSection(),
+              const SizedBox(height: 24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      // Add functionality for refreshing data
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    child: const Text(
+                      'Refresh Data',
+                      style: TextStyle(fontSize: 16),
                     ),
                   ),
-                  child: const Text(
-                    'Refresh Data',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    // Add functionality for accessing settings
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Add functionality for accessing settings
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    child: const Text(
+                      'Settings',
+                      style: TextStyle(fontSize: 16),
                     ),
                   ),
-                  child: const Text(
-                    'Settings',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ReportScreen()));
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ReportScreen()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.orange,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                    child: const Text(
+                      'Report Issue',
+                      style: TextStyle(fontSize: 16),
                     ),
                   ),
-                  child: const Text(
-                    'Report Issue',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 24),
-            _buildEducationalContent(),
-            const SizedBox(height: 24),
-            _buildNewsFeed(),
-          ],
+                ],
+              ),
+              const SizedBox(height: 24),
+              _buildEducationalContent(),
+              const SizedBox(height: 24),
+              _buildNewsFeed(),
+            ],
+          ),
         ),
       ),
     );
@@ -176,52 +178,52 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _buildEducationalContent() {
-    return Card(
-      elevation: 5,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
-      ),
-      child: const Padding(
-        padding: EdgeInsets.only(left: 3, top: 10, bottom: 10),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Image(
-              image: AssetImage('/assets/images/tips.jpg'),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  'Education Content',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                  ),
-                ),
-                SizedBox(
-                  height: 5.0,
-                ),
-                Text(
-                  'Learn about the impact of water quality on the environment and health.',
-                  style: TextStyle(fontSize: 15.0),
-                ),
-                Row(
-                  children: [
-                    Icon(Icons.arrow_back),
-                    SizedBox(
-                      width: 5.0,
-                    ),
-                    Text(
-                      'view more',
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ],
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
         ),
+        child: Column(
+          mai
+        ),
+        // child: const Row(
+        //   crossAxisAlignment: CrossAxisAlignment.start,
+        //   children: <Widget>[
+        //     Image(
+        //       image: AssetImage('assets/images/tips.jpg'),
+        //     ),
+        //     Column(
+        //       mainAxisAlignment: MainAxisAlignment.center,
+        //       children: [
+        //         Text(
+        //           'Education Content',
+        //           style: TextStyle(
+        //             fontSize: 16.0,
+        //           ),
+        //         ),
+        //         SizedBox(
+        //           height: 5.0,
+        //         ),
+        //         Text(
+        //           'Learn about the impact of water quality on the environment and health.',
+        //           style: TextStyle(fontSize: 15.0),
+        //         ),
+        //         Row(
+        //           children: [
+        //             Icon(Icons.arrow_back),
+        //             SizedBox(
+        //               width: 5.0,
+        //             ),
+        //             Text(
+        //               'view more',
+        //             ),
+        //           ],
+        //         )
+        //       ],
+        //     ),
+        //   ],
+        // ),
       ),
     );
   }
