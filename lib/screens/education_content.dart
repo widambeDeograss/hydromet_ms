@@ -29,21 +29,23 @@ class _EducationContentState extends State<EducationContent> {
                   borderRadius: BorderRadius.all(Radius.circular(8.0))),
               child: InkWell(
                 onTap: () => print("ciao"),
-                child: const Column(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch, // add this
                   children: <Widget>[
                     ClipRRect(
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(8.0),
                         topRight: Radius.circular(8.0),
                       ),
-                      child: Image(
-                          image: AssetImage(
+                      child: Image.asset(
                         'assets/images/heavy_rain.jpg',
-                      )),
+                          height: 200,
+                          width: 200,
+                          fit: BoxFit.cover,
+                      ),
                     ),
-                    ListTile(
-                      title: Text('Pub 1'),
+                    const ListTile(
+                      title: Text('Heavy rainfall'),
                       subtitle: Text('Location 1'),
                     ),
                   ],
@@ -58,22 +60,23 @@ class _EducationContentState extends State<EducationContent> {
                   borderRadius: BorderRadius.all(Radius.circular(8.0))),
               child: InkWell(
                 onTap: () => print("ciao"),
-                child: const Column(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     ClipRRect(
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(8.0),
                         topRight: Radius.circular(8.0),
                       ),
-                      child: Image(
-                        image: AssetImage(
-                          'assets/images/geolocation.png',
-                        ),
+                      child: Image.asset(
+                        'assets/images/floods.jpg',
+                          height: 200,
+                          width: 200,
+                          fit: BoxFit.cover,
                       ),
                     ),
-                    ListTile(
-                      title: Text('Pub 1'),
+                    const ListTile(
+                      title: Text('Floods'),
                       subtitle: Text('Location 1'),
                     ),
                   ],
@@ -88,20 +91,23 @@ class _EducationContentState extends State<EducationContent> {
                   borderRadius: BorderRadius.all(Radius.circular(8.0))),
               child: InkWell(
                 onTap: () => print("ciao"),
-                child: const Column(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     ClipRRect(
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(8.0),
                         topRight: Radius.circular(8.0),
                       ),
-                      child: Image(
-                        image: AssetImage('assets/images/floods.jpg'),
+                      child: Image.asset(
+                        'assets/images/drought.jpg',
+                          height: 200,
+                          width: 200,
+                          fit: BoxFit.cover,
                       ),
                     ),
-                    ListTile(
-                      title: Text('Pub 1'),
+                    const ListTile(
+                      title: Text('Drought'),
                       subtitle: Text('Location 1'),
                     ),
                   ],

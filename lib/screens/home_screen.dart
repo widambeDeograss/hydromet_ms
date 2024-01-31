@@ -13,7 +13,13 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Hydromet Dashboard'),
+        title: const Text(
+          'Hydromet Dashboard',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -41,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       child: const Text(
                         'Refresh Data',
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: 15),
                       ),
                     ),
                     ElevatedButton(
@@ -56,7 +62,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       child: const Text(
                         'Settings',
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: 15),
                       ),
                     ),
                     ElevatedButton(
@@ -74,7 +80,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       child: const Text(
                         'Report Issue',
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: 15),
                       ),
                     ),
                   ],
@@ -91,12 +97,16 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         ListTile(
                           leading: const Image(
-                            image: AssetImage('assets/images/tips.jpg'),
+                            image: AssetImage(
+                              'assets/images/tips.jpg',
+                            ),
                           ),
                           title: const Text(
                             'Education Content',
                             style: TextStyle(
-                                fontSize: 15.0, fontWeight: FontWeight.bold),
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           subtitle: Column(
                             children: [
@@ -153,7 +163,10 @@ class HomeScreen extends StatelessWidget {
   Widget _buildLocationInfo(String location) {
     return Text(
       'Current Location: $location',
-      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      style: const TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
     );
   }
 
@@ -178,11 +191,11 @@ class HomeScreen extends StatelessWidget {
               leading: Icon(Icons.warning, color: Colors.red, size: 36),
               title: Text(
                 'High Water Levels Detected!',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 15),
               ),
               subtitle: Text(
                 'Please take necessary precautions.',
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 15),
               ),
             ),
             // Add more alerts as needed
@@ -208,22 +221,7 @@ class HomeScreen extends StatelessWidget {
           ),
           child: const Text(
             'Refresh Data',
-            style: TextStyle(fontSize: 16),
-          ),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            // Add functionality for accessing settings
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.green,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-          ),
-          child: const Text(
-            'Settings',
-            style: TextStyle(fontSize: 16),
+            style: TextStyle(fontSize: 15),
           ),
         ),
         ElevatedButton(
@@ -236,7 +234,7 @@ class HomeScreen extends StatelessWidget {
           ),
           child: const Text(
             'Report Issue',
-            style: TextStyle(fontSize: 16),
+            style: TextStyle(fontSize: 15),
           ),
         ),
       ],
@@ -280,11 +278,11 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'News Feed',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Container(
               height: 200, // Adjust the height as needed
               child: ListView.builder(
