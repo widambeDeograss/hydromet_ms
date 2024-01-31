@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Hydromet Dashboard'),
+        title: const Text('Hydromet Dashboard'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -78,7 +80,7 @@ class HomeScreen extends StatelessWidget {
             // Add functionality for refreshing data
           },
           style: ElevatedButton.styleFrom(
-            primary: Colors.blue,
+            backgroundColor: Colors.blue,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
@@ -108,7 +110,7 @@ class HomeScreen extends StatelessWidget {
             // Add functionality for reporting issues
           },
           style: ElevatedButton.styleFrom(
-            primary: Colors.orange,
+            backgroundColor: Colors.orange,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
