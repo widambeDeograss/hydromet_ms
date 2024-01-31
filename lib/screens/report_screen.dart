@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
 class ReportScreen extends StatefulWidget {
-  const ReportScreen({super.key});
+  const ReportScreen({Key? key}) : super(key: key);
 
   @override
   _ReportScreenState createState() => _ReportScreenState();
@@ -11,6 +11,7 @@ class ReportScreen extends StatefulWidget {
 class _ReportScreenState extends State<ReportScreen> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
+  final TextEditingController messageController = TextEditingController();
   String currentLocation = "Unknown";
 
   @override
@@ -20,14 +21,19 @@ class _ReportScreenState extends State<ReportScreen> {
   }
 
   _getCurrentLocation() async {
-    Position position = await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.high,
-    );
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
 
-    setState(() {
-      currentLocation =
-      "Lat: ${position.latitude}, Long: ${position.longitude}";
-    });
+      print(position);
+      setState(() {
+        currentLocation =
+            "Lat: ${position.latitude}, Long: ${position.longitude}";
+      });
+    } catch (e) {
+      print("Error getting location: $e");
+    }
   }
 
   @override
@@ -52,11 +58,23 @@ class _ReportScreenState extends State<ReportScreen> {
               decoration: InputDecoration(labelText: 'Phone Number'),
             ),
             SizedBox(height: 16),
+            TextField(
+              controller: messageController,
+              decoration: InputDecoration(labelText: 'Message'),
+            ),
+            SizedBox(height: 16),
             Text('Current Location: $currentLocation'),
             SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
-                _submitReport();
+                _getCurrentLocation(); // Update location when the button is pressed
+              },
+              child: Text('Get Current Location'),
+            ),
+            SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                _submitReport(context);
               },
               child: Text('Submit Report'),
             ),
@@ -66,14 +84,32 @@ class _ReportScreenState extends State<ReportScreen> {
     );
   }
 
-  _submitReport() {
+  _submitReport(BuildContext context) {
     String name = nameController.text;
     String phone = phoneController.text;
-
-    // TODO: Add logic to send the report with name, phone, and location.
+    String message = messageController.text;
 
     // For now, just print the information.
-    print('Name: $name, Phone: $phone, Location: $currentLocation');
+    String reportInfo =
+        'Name: $name, Phone: $phone, Message: $message, Location: $currentLocation';
+
+    // Show an alert dialog with the report information.
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Report Information'),
+          content: Text(reportInfo),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); // Close the dialog
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
   }
 }
-
