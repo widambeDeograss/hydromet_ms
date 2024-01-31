@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Hydromet Dashboard'),
+        title: const Text('Hydromet Dashboard'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -78,7 +80,7 @@ class HomeScreen extends StatelessWidget {
             // Add functionality for refreshing data
           },
           style: ElevatedButton.styleFrom(
-            primary: Colors.blue,
+            backgroundColor: Colors.blue,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
@@ -108,7 +110,7 @@ class HomeScreen extends StatelessWidget {
             // Add functionality for reporting issues
           },
           style: ElevatedButton.styleFrom(
-            primary: Colors.orange,
+            backgroundColor: Colors.orange,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
@@ -128,20 +130,56 @@ class HomeScreen extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
-      child: const Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 3, top: 10, bottom: 10),
+        child: const Row(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            ListTile(
-              leading: Image(image: AssetImage('assets/images/tips.jpg')),
-              title: Text(
-                'Education Content',
-                style: TextStyle(
-                  fontSize: 20, 
-                  fontWeight: FontWeight.bold),
-              ),
+            Image(
+              image: AssetImage('/assets/images/tips.jpg'),
+            ),
+            // const ListTile(
+            //   leading: Image(
+            //     image: AssetImage(
+            //       'assets/images/tips.jpg',
+            //     ),
+                
+            //   ),
+            //   title: Text(
+            //     'Education Content',
+            //     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            //   ),
+            //   subtitle: Text(
+            //     'Learn about the impact of water quality on the environment and health.',
+            //     style: TextStyle(
+            //       fontSize: 16,
+            //     ),
+            //   ),
+            // ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.end,
+            //   children: [
+            //     TextButton(
+            //       onPressed: () {},
+            //       child: const Row(
+            //         children: [
+            //           Icon(
+            //             Icons.arrow_back,
+            //           ),
+            //           SizedBox(
+            //             width: 5.0,
+            //           ),
+            //           Text(
+            //             'view more',
+            //             style: TextStyle(
+            //               fontSize: 16,
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+              ],
             ),
             // Text(
             //   'Educational Content',
