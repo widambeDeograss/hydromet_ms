@@ -1,4 +1,6 @@
+import 'dart:js';
 import 'package:flutter/material.dart';
+import 'package:hydromet_ms/screens/report_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -107,7 +109,10 @@ class HomeScreen extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            // Add functionality for reporting issues
+            Navigator.push(
+              context as BuildContext,
+              MaterialPageRoute(builder: (context) => ReportScreen()),
+            );
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.orange,
