@@ -132,17 +132,27 @@ class HomeScreen extends StatelessWidget {
         padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Educational Content',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            ListTile(
+              leading: Image(image: AssetImage('assets/images/tips.jpg')),
+              title: Text(
+                'Education Content',
+                style: TextStyle(
+                  fontSize: 20, 
+                  fontWeight: FontWeight.bold),
+              ),
             ),
-            SizedBox(height: 16),
-            // Add educational content here
-            Text(
-              'Learn about the impact of water quality on the environment and health.',
-              style: TextStyle(fontSize: 16),
-            ),
+            // Text(
+            //   'Educational Content',
+            //   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            // ),
+            // SizedBox(height: 16),
+            // // Add educational content here
+            // Text(
+            //   'Learn about the impact of water quality on the environment and health.',
+            //   style: TextStyle(fontSize: 16),
+            // ),
             // Add more educational content as needed
           ],
         ),

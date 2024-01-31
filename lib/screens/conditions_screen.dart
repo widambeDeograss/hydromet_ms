@@ -13,11 +13,11 @@ class ConditionsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Current Conditions',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -28,18 +28,18 @@ class ConditionsScreen extends StatelessWidget {
               ],
             ),
             SizedBox(height: 24),
-            Text(
+            const Text(
               'Water Flow Rate Changes',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 10),
             Container(
               height: 300,
               child: LineChart(
                 _buildWaterFlowRateChart(),
               ),
             ),
-            SizedBox(height: 24),
+            SizedBox(height: 16),
             _buildPHCard('pH', '7.2',
                 'The water is safe for consumption.'), // pH card with value '7.2' (replace with actual pH data)
           ],
