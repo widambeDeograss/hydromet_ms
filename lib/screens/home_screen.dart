@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: SingleChildScrollView(
-          child: Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildLocationInfo('Dar es Salaam'),
@@ -79,7 +79,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 24),
                 _buildNewsFeed(),
               ],
-          ),
+            ),
           ),
         ),
       ),
@@ -186,10 +186,33 @@ class HomeScreen extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
-        child: Column(
+        child: const Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            
+            ListTile(
+              leading: Image(
+                image: AssetImage('assets/images/tips.jpg'),
+              ),
+              title: Text(
+                'Education Content',
+                style: TextStyle(fontSize: 15.0),
+              ),
+              subtitle: Column(
+                children: [
+                  Text('Learn about the impact of water quality on the environment and health.',
+                  style: TextStyle(fontSize: 15,),
+                  ),
+                  SizedBox(height: 5.0,),
+                  Row(
+                    children: [
+                      Icon(Icons.arrow_forward,),
+                      SizedBox(width: 5.0,),
+                      Text('view more',),
+                    ],
+                  )
+                ],
+              ),
+            ),
           ],
         ),
         // child: const Row(
