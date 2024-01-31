@@ -1,10 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:hydromet_ms/screens/report_screen.dart';
 
-import 'education_content.dart';
+import '../components/news.dart';
+import '../components/newsCard.dart';
+import 'news_details_screen.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final List<News> newsList = [
+    News(
+      title: 'Flood Alert',
+      content: 'Heavy rainfall expected in the region. Be cautious!',
+      imageUrl:
+          'https://www.science.org/do/10.1126/science.abl5271/full/germanyfloods_1280x720-1644902881893.jpg',
+    ),
+    News(
+      title: 'Hydromet Conference',
+      content: 'Join us for the annual Hydromet Conference next week.',
+      imageUrl:
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl4PVsVZR9b75KjwGFrxikPG8Ezia5dpY5CX5gfzYTFfLZpvOGN_d8qTm1_0SvFyATurc&usqp=CAU',
+    ),
+    News(
+      title: 'River Monitoring',
+      content: 'Latest river levels indicate normal conditions.',
+      imageUrl:
+          'https://www.fondriest.com/environmental-measurements/wp-content/uploads/2015/08/riverstream_installationconsider.jpg',
+    ),
+    News(
+      title: 'Weather Forecast',
+      content: 'Sunny skies expected for the upcoming days.',
+      imageUrl:
+          'https://www.fondriest.com/environmental-measurements/wp-content/uploads/2015/08/riverstream_installationconsider.jpg',
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -38,21 +65,6 @@ class HomeScreen extends StatelessWidget {
                       ),
                       child: const Text(
                         'Refresh Data',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Add functionality for accessing settings
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                      child: const Text(
-                        'Settings',
                         style: TextStyle(fontSize: 16),
                       ),
                     ),
@@ -113,14 +125,14 @@ class HomeScreen extends StatelessWidget {
             SizedBox(height: 16),
             // Display real-time alerts or notifications here
             ListTile(
-              leading: Icon(Icons.warning, color: Colors.red, size: 36),
+              leading: Icon(Icons.warning, color: Colors.red, size: 26),
               title: Text(
                 'High Water Levels Detected!',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 15),
               ),
               subtitle: Text(
                 'Please take necessary precautions.',
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 13),
               ),
             ),
             // Add more alerts as needed
@@ -146,21 +158,6 @@ class HomeScreen extends StatelessWidget {
           ),
           child: const Text(
             'Refresh Data',
-            style: TextStyle(fontSize: 16),
-          ),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            // Add functionality for accessing settings
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.green,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-          ),
-          child: const Text(
-            'Settings',
             style: TextStyle(fontSize: 16),
           ),
         ),
@@ -211,9 +208,7 @@ class HomeScreen extends StatelessWidget {
                     height: 5.0,
                   ),
                   TextButton(
-                    onPressed: () {
-                      
-                    },
+                    onPressed: () {},
                     child: const Row(
                       children: [
                         Icon(
@@ -233,7 +228,6 @@ class HomeScreen extends StatelessWidget {
             ),
           ],
         ),
-
       ),
     );
   }
@@ -244,8 +238,8 @@ class HomeScreen extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
-      child: const Padding(
-        padding: EdgeInsets.all(16.0),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -254,17 +248,27 @@ class HomeScreen extends StatelessWidget {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 16),
-            // Display news feed or blog updates here
-            ListTile(
-              title: Text(
-                'New Hydromet Sensor Installed in Dar es Salaam',
-                style: TextStyle(fontSize: 18),
+            Container(
+              height: 200, // Adjust the height as needed
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: newsList.length,
+                itemBuilder: (context, index) {
+                  return NewsCard(
+                    news: newsList[index],
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              NewsDetailScreen(news: newsList[index]),
+                        ),
+                      );
+                    },
+                  );
+                },
               ),
-              subtitle: Text(
-                'Stay informed about the latest developments.',
-                style: TextStyle(fontSize: 16),
-              ),
-            ), // Add more news feed items as needed
+            ),
           ],
         ),
       ),
