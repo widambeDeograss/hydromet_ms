@@ -10,13 +10,9 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
   final spinkit = SpinKitFadingCircle(
-    itemBuilder: (BuildContext context, int index) {
-      return DecoratedBox(
-        decoration: BoxDecoration(
-          color: index.isEven ? Colors.red : Colors.green,
-        ),
-      );
-    },
+    color: Colors.blue.shade400,
+    size: 50.0,
+    duration: const Duration(seconds: 3),
   );
 
   @override
@@ -45,12 +41,13 @@ class HomeScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    ElevatedButton(
+                    RawMaterialButton(
                       onPressed: () {
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
+                              elevation: 2.0,
                               title: const Text('Report Information'),
                               content: spinkit,
                               actions: [
@@ -58,55 +55,58 @@ class HomeScreen extends StatelessWidget {
                                   onPressed: () {
                                     Navigator.pop(context); // Close the dialog
                                   },
-                                  child: Text('OK'),
+                                  child: const Text('OK'),
                                 ),
                               ],
                             );
                           },
                         );
                       },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
+                      elevation: 0.0,
+                      constraints: const BoxConstraints.tightFor(
+                        width: 110.0,
+                        height: 50.0,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        side: const BorderSide(
+                          width: 1,
                         ),
                       ),
+                      fillColor: Colors.blueAccent,
                       child: const Text(
                         'Refresh Data',
-                        style: TextStyle(fontSize: 15),
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Add functionality for accessing settings
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
+                        style: TextStyle(
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      child: const Text(
-                        'Settings',
-                        style: TextStyle(fontSize: 15),
-                      ),
                     ),
-                    ElevatedButton(
+                    RawMaterialButton(
                       onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const ReportScreen()));
                       },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.orange,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
+                      elevation: 0.0,
+                      constraints: const BoxConstraints.tightFor(
+                        width: 110.0,
+                        height: 50.0,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        side: const BorderSide(
+                          width: 1,
                         ),
                       ),
+                      fillColor: Colors.orangeAccent,
                       child: const Text(
                         'Report Issue',
-                        style: TextStyle(fontSize: 15),
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],
@@ -115,6 +115,7 @@ class HomeScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Card(
+                    elevation: 5,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -122,10 +123,9 @@ class HomeScreen extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         ListTile(
-                          leading: const Image(
-                            image: AssetImage(
-                              'assets/images/tips.jpg',
-                            ),
+                          leading: Image.asset(
+                            'assets/images/tips.jpg',
+                            fit: BoxFit.cover,
                           ),
                           title: const Text(
                             'Education Content',
@@ -134,44 +134,50 @@ class HomeScreen extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          subtitle: Column(
-                            children: [
-                              const Text(
-                                'Learn about the impact of water quality on the environment and health.',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 5.0,
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const EducationContent(),
-                                    ),
-                                  );
-                                },
-                                child: const Row(
-                                  children: [
-                                    Icon(
-                                      Icons.arrow_forward,
-                                    ),
-                                    SizedBox(
-                                      width: 5.0,
-                                    ),
-                                    Text(
-                                      'view more',
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
+                          subtitle:  const Text(
+                            'Learn about the impact of water quality on the environment and health.',
+                            style: TextStyle(
+                              fontSize: 15,
+                            ),
                           ),
                         ),
+                        SizedBox(
+                          height: 10.0,
+                          width: 200.0,
+                          child: Divider(
+                            color: Colors.teal[100],
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                const EducationContent(),
+                              ),
+                            );
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.only(left: 90.0,),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.arrow_forward,
+                                ),
+                                SizedBox(
+                                  width: 5.0,
+                                ),
+                                Text(
+                                  'view more',
+                                  style: TextStyle(
+                                    fontSize: 15.0,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   ),
@@ -214,7 +220,11 @@ class HomeScreen extends StatelessWidget {
             SizedBox(height: 16),
             // Display real-time alerts or notifications here
             ListTile(
-              leading: Icon(Icons.warning, color: Colors.red, size: 36),
+              leading: Icon(
+                Icons.warning,
+                color: Colors.red,
+                size: 36,
+              ),
               title: Text(
                 'High Water Levels Detected!',
                 style: TextStyle(fontSize: 15),
