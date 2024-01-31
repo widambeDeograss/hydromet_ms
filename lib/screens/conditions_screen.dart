@@ -9,7 +9,7 @@ class ConditionsScreen extends StatelessWidget {
         title: Text('Hydromet Conditions'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -27,19 +27,19 @@ class ConditionsScreen extends StatelessWidget {
                 _buildConditionCard(Icons.opacity, 'Humidity', '65%'),
               ],
             ),
-            SizedBox(height: 24),
+            SizedBox(height: 14),
             const Text(
               'Water Flow Rate Changes',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Container(
-              height: 300,
+              height: 250,
               child: LineChart(
                 _buildWaterFlowRateChart(),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             _buildPHCard('pH', '7.2',
                 'The water is safe for consumption.'), // pH card with value '7.2' (replace with actual pH data)
           ],
@@ -49,42 +49,47 @@ class ConditionsScreen extends StatelessWidget {
   }
 
   Widget _buildConditionCard(IconData icon, String title, String value) {
-    return Card(
-      elevation: 3,
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          children: [
-            Icon(icon, size: 40, color: Colors.blue),
-            SizedBox(height: 8),
-            Text(title,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-            SizedBox(height: 4),
-            Text(value, style: TextStyle(fontSize: 14)),
-          ],
+    return Expanded(
+      child: Card(
+        elevation: 3,
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            children: [
+              Icon(icon, size: 30, color: Colors.blue),
+              SizedBox(height: 8),
+              Text(title,
+                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+              SizedBox(height: 4),
+              Text(value, style: TextStyle(fontSize: 14)),
+            ],
+          ),
         ),
       ),
     );
   }
 
   Widget _buildPHCard(String title, String value, String comment) {
-    return Card(
-      elevation: 3,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Icon(Icons.opacity, size: 40, color: Colors.blue),
-            SizedBox(height: 8),
-            Text(title,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            SizedBox(height: 4),
-            Text(value, style: TextStyle(fontSize: 18)),
-            SizedBox(height: 16),
-            Divider(height: 1, color: Colors.grey),
-            SizedBox(height: 16),
-            Text(comment, style: TextStyle(fontSize: 16, color: Colors.blue)),
-          ],
+    return Expanded(
+      child: Card(
+        elevation: 3,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: [
+              const Icon(Icons.opacity, size: 30, color: Colors.blue),
+              const SizedBox(height: 8),
+              Text(title,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              SizedBox(height: 4),
+              Text(value, style: TextStyle(fontSize: 18)),
+              SizedBox(height: 10),
+              Divider(height: 1, color: Colors.grey),
+              SizedBox(height: 10),
+              Text(comment,
+                  style: const TextStyle(fontSize: 13, color: Colors.blue)),
+            ],
+          ),
         ),
       ),
     );
