@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:hydromet_ms/screens/report_screen.dart';
-
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../components/news.dart';
 import '../components/newsCard.dart';
 import 'education_content.dart';
 import 'news_details_screen.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+
+  final spinkit = SpinKitFadingCircle(
+    itemBuilder: (BuildContext context, int index) {
+      return DecoratedBox(
+        decoration: BoxDecoration(
+          color: index.isEven ? Colors.red : Colors.green,
+        ),
+      );
+    },
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +47,23 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        // Add functionality for refreshing data
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text('Report Information'),
+                              content: spinkit,
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context); // Close the dialog
+                                  },
+                                  child: Text('OK'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue,
