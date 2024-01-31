@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hydromet_ms/screens/report_screen.dart';
 
+import 'education_content.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -14,7 +16,7 @@ class HomeScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: SingleChildScrollView(
-          child: Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildLocationInfo('Dar es Salaam'),
@@ -79,7 +81,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 24),
                 _buildNewsFeed(),
               ],
-          ),
+            ),
           ),
         ),
       ),
@@ -189,46 +191,49 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            
+            ListTile(
+              leading: const Image(
+                image: AssetImage('assets/images/tips.jpg'),
+              ),
+              title: const Text(
+                'Education Content',
+                style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
+              ),
+              subtitle: Column(
+                children: [
+                  const Text(
+                    'Learn about the impact of water quality on the environment and health.',
+                    style: TextStyle(
+                      fontSize: 15,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5.0,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      
+                    },
+                    child: const Row(
+                      children: [
+                        Icon(
+                          Icons.arrow_forward,
+                        ),
+                        SizedBox(
+                          width: 5.0,
+                        ),
+                        Text(
+                          'view more',
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
           ],
         ),
-        // child: const Row(
-        //   crossAxisAlignment: CrossAxisAlignment.start,
-        //   children: <Widget>[
-        //     Image(
-        //       image: AssetImage('assets/images/tips.jpg'),
-        //     ),
-        //     Column(
-        //       mainAxisAlignment: MainAxisAlignment.center,
-        //       children: [
-        //         Text(
-        //           'Education Content',
-        //           style: TextStyle(
-        //             fontSize: 16.0,
-        //           ),
-        //         ),
-        //         SizedBox(
-        //           height: 5.0,
-        //         ),
-        //         Text(
-        //           'Learn about the impact of water quality on the environment and health.',
-        //           style: TextStyle(fontSize: 15.0),
-        //         ),
-        //         Row(
-        //           children: [
-        //             Icon(Icons.arrow_back),
-        //             SizedBox(
-        //               width: 5.0,
-        //             ),
-        //             Text(
-        //               'view more',
-        //             ),
-        //           ],
-        //         )
-        //       ],
-        //     ),
-        //   ],
-        // ),
+
       ),
     );
   }
@@ -259,8 +264,7 @@ class HomeScreen extends StatelessWidget {
                 'Stay informed about the latest developments.',
                 style: TextStyle(fontSize: 16),
               ),
-            ),
-            // Add more news feed items as needed
+            ), // Add more news feed items as needed
           ],
         ),
       ),
