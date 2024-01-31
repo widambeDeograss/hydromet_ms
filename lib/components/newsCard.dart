@@ -14,7 +14,7 @@ class NewsCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: 200, // Adjust the width as needed
-        margin: EdgeInsets.all(6),
+        margin: EdgeInsets.all(4),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
         ),
@@ -25,13 +25,13 @@ class NewsCard extends StatelessWidget {
               borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
               child: Image.network(
                 news.imageUrl,
-                height: 80,
+                height: 100,
                 width: 200,
                 fit: BoxFit.cover,
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(5.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -39,7 +39,7 @@ class NewsCard extends StatelessWidget {
                     news.title,
                     style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 3),
+                  SizedBox(height: 1),
                   Text(
                     news.content,
                     style: TextStyle(fontSize: 10),
