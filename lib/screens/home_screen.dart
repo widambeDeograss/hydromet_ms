@@ -43,21 +43,22 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     RawMaterialButton(
                       onPressed: () {
-                        showDialog(
+                        showAdaptiveDialog(
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              elevation: 2.0,
-                              title: const Text('Report Information'),
-                              content: spinkit,
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context); // Close the dialog
-                                  },
-                                  child: const Text('OK'),
+                              elevation: 5.0,
+                              insetPadding: const EdgeInsets.all(15.0),
+                              backgroundColor: Colors.transparent,
+                              content: Container(
+                                width: double.infinity,
+                                height: 200,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
                                 ),
-                              ],
+                                padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
+                                child: spinkit,
+                              ),
                             );
                           },
                         );
