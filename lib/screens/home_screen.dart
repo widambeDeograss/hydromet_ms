@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hydromet_ms/screens/report_screen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:hydromet_ms/screens/report_screen.dart';
+
 import '../components/news.dart';
 import '../components/newsCard.dart';
 import 'education_content.dart';
@@ -43,7 +44,7 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     RawMaterialButton(
                       onPressed: () {
-                        showAdaptiveDialog(
+                        showDialog(
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
@@ -54,9 +55,10 @@ class HomeScreen extends StatelessWidget {
                                 width: double.infinity,
                                 height: 200,
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
+                                  borderRadius: BorderRadius.circular(15),
                                 ),
-                                padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
+                                padding:
+                                    const EdgeInsets.fromLTRB(20, 50, 20, 20),
                                 child: spinkit,
                               ),
                             );
@@ -80,22 +82,7 @@ class HomeScreen extends StatelessWidget {
                         style: TextStyle(fontSize: 16),
                       ),
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Add functionality for accessing settings
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                      child: const Text(
-                        'Settings',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ),
-                    ElevatedButton(
+                    RawMaterialButton(
                       onPressed: () {
                         Navigator.push(
                             context,
@@ -147,7 +134,7 @@ class HomeScreen extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          subtitle:  const Text(
+                          subtitle: const Text(
                             'Learn about the impact of water quality on the environment and health.',
                             style: TextStyle(
                               fontSize: 15,
@@ -166,13 +153,14 @@ class HomeScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                const EducationContent(),
+                                builder: (context) => const EducationContent(),
                               ),
                             );
                           },
                           child: const Padding(
-                            padding: EdgeInsets.only(left: 90.0,),
+                            padding: EdgeInsets.only(
+                              left: 90.0,
+                            ),
                             child: Row(
                               children: [
                                 Icon(
