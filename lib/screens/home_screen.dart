@@ -45,21 +45,6 @@ class HomeScreen extends StatelessWidget {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        // Add functionality for accessing settings
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                      child: const Text(
-                        'Settings',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
