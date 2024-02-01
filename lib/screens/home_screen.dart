@@ -1,18 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:hydromet_ms/screens/report_screen.dart';
-
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../components/news.dart';
 import '../components/newsCard.dart';
+import 'education_content.dart';
 import 'news_details_screen.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+
+  final spinkit = SpinKitFadingCircle(
+    color: Colors.blue.shade400,
+    size: 50.0,
+    duration: const Duration(seconds: 3),
+  );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Hydromet Dashboard'),
+        title: const Text(
+          'Hydromet Dashboard',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -28,18 +41,57 @@ class HomeScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    RawMaterialButton(
+                      onPressed: () {
+                        showAdaptiveDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              elevation: 5.0,
+                              insetPadding: const EdgeInsets.all(15.0),
+                              backgroundColor: Colors.transparent,
+                              content: Container(
+                                width: double.infinity,
+                                height: 200,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                ),
+                                padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
+                                child: spinkit,
+                              ),
+                            );
+                          },
+                        );
+                      },
+                      elevation: 0.0,
+                      constraints: const BoxConstraints.tightFor(
+                        width: 110.0,
+                        height: 50.0,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        side: const BorderSide(
+                          width: 1,
+                        ),
+                      ),
+                      fillColor: Colors.blueAccent,
+                      child: const Text(
+                        'Refresh Data',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
                     ElevatedButton(
                       onPressed: () {
-                        // Add functionality for refreshing data
+                        // Add functionality for accessing settings
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
+                        backgroundColor: Colors.green,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                       ),
                       child: const Text(
-                        'Refresh Data',
+                        'Settings',
                         style: TextStyle(fontSize: 16),
                       ),
                     ),
@@ -50,21 +102,99 @@ class HomeScreen extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (context) => const ReportScreen()));
                       },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.orange,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
+                      elevation: 0.0,
+                      constraints: const BoxConstraints.tightFor(
+                        width: 110.0,
+                        height: 50.0,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        side: const BorderSide(
+                          width: 1,
                         ),
                       ),
+                      fillColor: Colors.orangeAccent,
                       child: const Text(
                         'Report Issue',
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 24),
-                _buildEducationalContent(),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Card(
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ListTile(
+                          leading: Image.asset(
+                            'assets/images/tips.jpg',
+                            fit: BoxFit.cover,
+                          ),
+                          title: const Text(
+                            'Education Content',
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          subtitle:  const Text(
+                            'Learn about the impact of water quality on the environment and health.',
+                            style: TextStyle(
+                              fontSize: 15,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10.0,
+                          width: 200.0,
+                          child: Divider(
+                            color: Colors.teal[100],
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                const EducationContent(),
+                              ),
+                            );
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.only(left: 90.0,),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.arrow_forward,
+                                ),
+                                SizedBox(
+                                  width: 5.0,
+                                ),
+                                Text(
+                                  'view more',
+                                  style: TextStyle(
+                                    fontSize: 15.0,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 24),
                 _buildNewsFeed(),
               ],
@@ -78,7 +208,10 @@ class HomeScreen extends StatelessWidget {
   Widget _buildLocationInfo(String location) {
     return Text(
       'Current Location: $location',
-      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      style: const TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
     );
   }
 
@@ -100,14 +233,18 @@ class HomeScreen extends StatelessWidget {
             SizedBox(height: 16),
             // Display real-time alerts or notifications here
             ListTile(
-              leading: Icon(Icons.warning, color: Colors.red, size: 36),
+              leading: Icon(
+                Icons.warning,
+                color: Colors.red,
+                size: 36,
+              ),
               title: Text(
                 'High Water Levels Detected!',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 15),
               ),
               subtitle: Text(
                 'Please take necessary precautions.',
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 15),
               ),
             ),
             // Add more alerts as needed
@@ -133,22 +270,7 @@ class HomeScreen extends StatelessWidget {
           ),
           child: const Text(
             'Refresh Data',
-            style: TextStyle(fontSize: 16),
-          ),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            // Add functionality for accessing settings
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.green,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-          ),
-          child: const Text(
-            'Settings',
-            style: TextStyle(fontSize: 16),
+            style: TextStyle(fontSize: 15),
           ),
         ),
         ElevatedButton(
@@ -161,64 +283,10 @@ class HomeScreen extends StatelessWidget {
           ),
           child: const Text(
             'Report Issue',
-            style: TextStyle(fontSize: 16),
+            style: TextStyle(fontSize: 15),
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildEducationalContent() {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              leading: const Image(
-                image: AssetImage('assets/images/tips.jpg'),
-              ),
-              title: const Text(
-                'Education Content',
-                style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
-              ),
-              subtitle: Column(
-                children: [
-                  const Text(
-                    'Learn about the impact of water quality on the environment and health.',
-                    style: TextStyle(
-                      fontSize: 15,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5.0,
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Row(
-                      children: [
-                        Icon(
-                          Icons.arrow_forward,
-                        ),
-                        SizedBox(
-                          width: 5.0,
-                        ),
-                        Text(
-                          'view more',
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 
@@ -259,11 +327,11 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'News Feed',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Container(
               height: 200, // Adjust the height as needed
               child: ListView.builder(
