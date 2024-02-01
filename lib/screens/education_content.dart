@@ -26,7 +26,7 @@ class _EducationContentState extends State<EducationContent> {
             margin: const EdgeInsets.all(8.0),
             child: Card(
               shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  borderRadius: BorderRadius.all(Radius.circular(15.0))),
               child: InkWell(
                 onTap: () => print("ciao"),
                 child: Column(
@@ -46,7 +46,12 @@ class _EducationContentState extends State<EducationContent> {
                     ),
                     const ListTile(
                       title: Text('Heavy rainfall'),
-                      subtitle: Text('Location 1'),
+                      subtitle: Text(
+                        'Lorem ipsum dolor sit amet,'
+                            ' consectetur adipiscing elit. Aliquam et leo eu '
+                            'turpis ullamcorper facilisis. Aliquam tincidunt at '
+                            'sapien vitae dapibus. Nunc vitae ultricies quam. ',
+                      ),
                     ),
                   ],
                 ),
@@ -57,7 +62,7 @@ class _EducationContentState extends State<EducationContent> {
             margin: const EdgeInsets.all(8.0),
             child: Card(
               shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  borderRadius: BorderRadius.all(Radius.circular(15.0))),
               child: InkWell(
                 onTap: () => print("ciao"),
                 child: Column(
@@ -77,7 +82,12 @@ class _EducationContentState extends State<EducationContent> {
                     ),
                     const ListTile(
                       title: Text('Floods'),
-                      subtitle: Text('Location 1'),
+                      subtitle: Text(
+                          'Lorem ipsum dolor sit amet,'
+                              ' consectetur adipiscing elit. Aliquam et leo eu '
+                              'turpis ullamcorper facilisis. Aliquam tincidunt at '
+                              'sapien vitae dapibus. Nunc vitae ultricies quam. ',
+                      ),
                     ),
                   ],
                 ),
@@ -88,7 +98,7 @@ class _EducationContentState extends State<EducationContent> {
             margin: const EdgeInsets.all(8.0),
             child: Card(
               shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  borderRadius: BorderRadius.all(Radius.circular(15.0))),
               child: InkWell(
                 onTap: () => print("ciao"),
                 child: Column(
@@ -108,7 +118,12 @@ class _EducationContentState extends State<EducationContent> {
                     ),
                     const ListTile(
                       title: Text('Drought'),
-                      subtitle: Text('Location 1'),
+                      subtitle: Text(
+                          'Lorem ipsum dolor sit amet,'
+                              ' consectetur adipiscing elit. Aliquam et leo eu '
+                              'turpis ullamcorper facilisis. Aliquam tincidunt at '
+                              'sapien vitae dapibus. Nunc vitae ultricies quam. ',
+                      ),
                     ),
                   ],
                 ),
