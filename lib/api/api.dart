@@ -1,9 +1,11 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 
 class ApiRequest {
-  final String url = "";
+  final String url = "http://192.168.130.169:5000";
 
-  get(
+  Future<dynamic> get(
     String urlData,
   ) async {
     var apiUrl = url + urlData;
@@ -12,7 +14,7 @@ class ApiRequest {
       var response = await http.get(Uri.parse(apiUrl));
 
       if (response.statusCode == 200) {
-        return response;
+        return json.decode(response.body);
       }
     } catch (e) {
       throw e.toString();
