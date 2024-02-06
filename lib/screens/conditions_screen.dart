@@ -81,11 +81,11 @@ class _ConditionsScreenState extends State<ConditionsScreen> {
                   'Rainfall',
                   hyd_conditions?['rain_fall']?[2] ?? 'N/A',
                 ),
-                _buildConditionCard(
-                  Icons.thermostat,
-                  'Temperature',
-                  hyd_conditions?['temperature_data'] ?? 'N/A',
-                ),
+                // _buildConditionCard(
+                //   Icons.thermostat,
+                //   'Temperature',
+                //   hyd_conditions?['temperature_data'] ?? 'N/A',
+                // ),
                 _buildConditionCard(Icons.opacity, 'Humidity',
                     "${hyd_conditions?['moisture_data']?[2] ?? 'N/A'},"),
               ],
@@ -107,7 +107,7 @@ class _ConditionsScreenState extends State<ConditionsScreen> {
                 'pH',
                 "${hyd_conditions?['ph_data']?[2] ?? 'N/A'} : ${hyd_conditions?['ph_data']?[3] ?? 'N/A'}",
                 hyd_conditions?['ph_data']?[3] == "MODERATE"
-                    ? "The water is not safe for consumption"
+                    ? "The water is safe for consumption"
                     : "The Water is not safe for consumption"), // pH card with value '7.2' (replace with actual pH data)
           ],
         ),
