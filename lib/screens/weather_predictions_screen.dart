@@ -11,6 +11,7 @@ class WeatherData extends StatelessWidget {
         children: [Text("WEATHER PREDICTIONS")],
       ),
     );
+    // ignore: dead_code
     throw UnimplementedError();
   }
 }

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ApiRequest {
-  final String url = "http://192.168.26.123:5000";
+  final String url = "http://192.168.115.123:8000";
 
   Future<dynamic> get(
     String urlData,

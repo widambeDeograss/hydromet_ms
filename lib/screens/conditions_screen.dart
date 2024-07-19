@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:hydromet_ms/api/api.dart';
@@ -12,20 +11,20 @@ class ConditionsScreen extends StatefulWidget {
 }
 
 class _ConditionsScreenState extends State<ConditionsScreen> {
-  var hyd_conditions;
+  List<dynamic> hyd_conditions = [];
   late Timer _timer;
-  late dynamic flowRateDat;
+  List<dynamic> flowRateDat = [];
 
   void get_conditions() async {
     ApiRequest api = ApiRequest();
-    var uridata = "/api/latest_data";
+    var uridata = "/api/data/";
 
     try {
       var response = await api.get(uridata);
-      print(response);
       setState(() {
-        hyd_conditions = response;
-        flowRateDat = response?["flow_rate_data"];
+        hyd_conditions = response["data"] ?? [];
+        flowRateDat =
+            hyd_conditions.map((item) => item["flowRate"] ?? 0.0).toList();
       });
     } catch (e) {
       print(e);
@@ -34,15 +33,14 @@ class _ConditionsScreenState extends State<ConditionsScreen> {
 
   @override
   void initState() {
+    super.initState();
     // Initial data fetch
     get_conditions();
 
-    // Periodic data fetch every 2 seconds
-    _timer = Timer.periodic(Duration(seconds: 2), (Timer timer) {
+    // Periodic data fetch every 30 seconds
+    _timer = Timer.periodic(const Duration(seconds: 30), (Timer timer) {
       get_conditions();
     });
-
-    super.initState();
   }
 
   @override
@@ -56,7 +54,7 @@ class _ConditionsScreenState extends State<ConditionsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Hydromet Conditions'),
+        title: const Text('Hydromet Conditions'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -74,41 +72,49 @@ class _ConditionsScreenState extends State<ConditionsScreen> {
                 _buildConditionCard(
                   Icons.waves,
                   'Water Level',
-                  hyd_conditions?['water_level_data']?[2] ?? 'N/A',
+                  hyd_conditions.isNotEmpty
+                      ? hyd_conditions.last['waterLevel'].toString()
+                      : 'N/A',
                 ),
                 _buildConditionCard(
                   Icons.cloud,
                   'Rainfall',
-                  hyd_conditions?['rain_fall']?[2] ?? 'N/A',
+                  hyd_conditions.isNotEmpty
+                      ? hyd_conditions.last['rainfall'].toString()
+                      : 'N/A',
                 ),
-                // _buildConditionCard(
-                //   Icons.thermostat,
-                //   'Temperature',
-                //   hyd_conditions?['temperature_data'] ?? 'N/A',
-                // ),
-                _buildConditionCard(Icons.opacity, 'Humidity',
-                    "${hyd_conditions?['moisture_data']?[2] ?? 'N/A'},"),
+                _buildConditionCard(
+                  Icons.opacity,
+                  'Humidity',
+                  hyd_conditions.isNotEmpty
+                      ? hyd_conditions.last['soilMoisture'].toString()
+                      : 'N/A',
+                ),
               ],
             ),
-            SizedBox(height: 14),
+            const SizedBox(height: 14),
             const Text(
               'Water Flow Rate Changes',
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            Container(
+            SizedBox(
               height: 250,
-              child: LineChart(
-                _buildWaterFlowRateChart(),
-              ),
+              child: flowRateDat.isNotEmpty
+                  ? LineChart(_buildWaterFlowRateChart())
+                  : const Center(child: Text("No data available")),
             ),
             const SizedBox(height: 16),
             _buildPHCard(
-                'pH',
-                "${hyd_conditions?['ph_data']?[2] ?? 'N/A'} : ${hyd_conditions?['ph_data']?[3] ?? 'N/A'}",
-                hyd_conditions?['ph_data']?[3] == "MODERATE"
-                    ? "The water is safe for consumption"
-                    : "The Water is not safe for consumption"), // pH card with value '7.2' (replace with actual pH data)
+              'pH',
+              hyd_conditions.isNotEmpty
+                  ? "${hyd_conditions.last['pHValue']} : ${hyd_conditions.last['pHStatus']}"
+                  : 'N/A',
+              hyd_conditions.isNotEmpty &&
+                      hyd_conditions.last['pHStatus'] == "MODERATE"
+                  ? "The water is safe for consumption"
+                  : "The Water is not safe for consumption",
+            ),
           ],
         ),
       ),
@@ -124,11 +130,12 @@ class _ConditionsScreenState extends State<ConditionsScreen> {
           child: Column(
             children: [
               Icon(icon, size: 30, color: Colors.blue),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text(title,
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-              SizedBox(height: 4),
-              Text(value, style: TextStyle(fontSize: 14)),
+                  style: const TextStyle(
+                      fontSize: 12, fontWeight: FontWeight.bold)),
+              const SizedBox(height: 4),
+              Text(value, style: const TextStyle(fontSize: 14)),
             ],
           ),
         ),
@@ -137,26 +144,25 @@ class _ConditionsScreenState extends State<ConditionsScreen> {
   }
 
   Widget _buildPHCard(String title, String value, String comment) {
-    return Expanded(
-      child: Card(
-        elevation: 3,
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: [
-              const Icon(Icons.opacity, size: 30, color: Colors.blue),
-              const SizedBox(height: 8),
-              Text(title,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              SizedBox(height: 4),
-              Text(value, style: TextStyle(fontSize: 18)),
-              SizedBox(height: 10),
-              Divider(height: 1, color: Colors.grey),
-              SizedBox(height: 10),
-              Text(comment,
-                  style: const TextStyle(fontSize: 13, color: Colors.blue)),
-            ],
-          ),
+    return Card(
+      elevation: 3,
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          children: [
+            const Icon(Icons.opacity, size: 30, color: Colors.blue),
+            const SizedBox(height: 8),
+            Text(title,
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 4),
+            Text(value, style: const TextStyle(fontSize: 18)),
+            const SizedBox(height: 10),
+            const Divider(height: 1, color: Colors.grey),
+            const SizedBox(height: 10),
+            Text(comment,
+                style: const TextStyle(fontSize: 13, color: Colors.blue)),
+          ],
         ),
       ),
     );
@@ -166,9 +172,9 @@ class _ConditionsScreenState extends State<ConditionsScreen> {
     List<FlSpot> spots = [];
 
     for (int i = 0; i < flowRateDat.length; i++) {
-      spots.add(
-          FlSpot(i.toDouble(), flowRateDat[i]["timestamp"].toDouble() * 0.04));
+      spots.add(FlSpot(i.toDouble(), flowRateDat[i] * 0.04));
     }
+
     return LineChartData(
       gridData: FlGridData(show: false),
       titlesData: FlTitlesData(show: false),
@@ -177,9 +183,13 @@ class _ConditionsScreenState extends State<ConditionsScreen> {
         border: Border.all(color: Colors.blue, width: 1),
       ),
       minX: 0,
-      maxX: flowRateDat.length.toDouble() - 1,
-      minY: 0,
-      maxY: 6,
+      maxX: spots.isNotEmpty ? spots.length.toDouble() - 1 : 0,
+      minY: spots.isNotEmpty
+          ? spots.map((spot) => spot.y).reduce((a, b) => a < b ? a : b)
+          : 0,
+      maxY: spots.isNotEmpty
+          ? spots.map((spot) => spot.y).reduce((a, b) => a > b ? a : b)
+          : 6,
       lineBarsData: [
         LineChartBarData(
           spots: spots,
